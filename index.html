@@ -4,8 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>MidSem Rush · Survive the HOD</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Serif+JP:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <style>
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#0a0a1a;--ground:#1a1a3a;--sky1:#0d0d2b;--sky2:#1a0a2e;
@@ -14,7 +14,7 @@
 }
 body{
   background:var(--bg);color:var(--white);
-  font-family:'Share Tech Mono',monospace;
+  font-family:'Courier New',Courier,monospace;
   display:flex;flex-direction:column;align-items:center;
   justify-content:flex-start;min-height:100vh;
   overflow:hidden;user-select:none;
@@ -37,7 +37,7 @@ body{
 }
 @keyframes pop{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
 .g-title{
-  font-family:'Orbitron',monospace;font-size:clamp(16px,4vw,26px);
+  font-family:'Courier New',Courier,monospace;font-size:clamp(16px,4vw,26px);
   font-weight:900;letter-spacing:3px;
   background:linear-gradient(90deg,var(--blue),var(--pink),var(--gold));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -57,7 +57,7 @@ body{
 }
 .hud-item{display:flex;align-items:center;gap:6px}
 .hud-label{color:#3a4f6a;font-size:10px}
-.hud-val{color:var(--gold);font-family:'Orbitron',monospace;font-size:13px}
+.hud-val{color:var(--gold);font-family:'Courier New',Courier,monospace;font-size:13px}
 #hp-bar-wrap{flex:1;min-width:120px}
 .hp-track{height:8px;background:#1a2535;border-radius:4px;overflow:hidden;width:100%}
 .hp-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));
@@ -80,7 +80,7 @@ body{
   justify-content:center;flex-wrap:wrap;
 }
 .ctrl-btn{
-  font-family:'Orbitron',monospace;font-size:11px;
+  font-family:'Courier New',Courier,monospace;font-size:11px;
   letter-spacing:2px;padding:12px 20px;
   border-radius:8px;border:1px solid;
   cursor:pointer;background:transparent;
@@ -112,7 +112,7 @@ body{
 .overlay.hidden{display:none}
 
 .ov-title{
-  font-family:'Noto Serif JP',serif;font-size:clamp(22px,5vw,38px);
+  font-family:'Georgia',serif;font-size:clamp(22px,5vw,38px);
   font-weight:700;text-align:center;margin-bottom:8px;
 }
 .ov-sub{font-size:11px;color:#5a7a99;letter-spacing:3px;margin-bottom:24px;text-align:center}
@@ -141,7 +141,7 @@ body{
 .leg-card .red{color:var(--red)}
 
 .ov-btn{
-  font-family:'Orbitron',monospace;font-size:13px;
+  font-family:'Courier New',Courier,monospace;font-size:13px;
   letter-spacing:3px;padding:14px 40px;
   border:1px solid var(--blue);color:var(--blue);
   background:transparent;border-radius:8px;
@@ -156,7 +156,7 @@ body{
   text-align:center;
 }
 .score-big{
-  font-family:'Orbitron',monospace;font-size:48px;font-weight:900;
+  font-family:'Courier New',Courier,monospace;font-size:48px;font-weight:900;
   color:var(--gold);text-shadow:0 0 30px rgba(255,213,79,0.6);
 }
 .score-label{font-size:10px;color:#3a4f6a;letter-spacing:4px;margin-bottom:8px}
@@ -173,7 +173,7 @@ body{
 /* floating text */
 .float-txt{
   position:fixed;pointer-events:none;
-  font-family:'Orbitron',monospace;font-size:14px;font-weight:700;
+  font-family:'Courier New',Courier,monospace;font-size:14px;font-weight:700;
   animation:float-up 1.2s ease forwards;z-index:200;
 }
 @keyframes float-up{
@@ -337,6 +337,7 @@ const OBS_TYPES = [
 
 /* ── DRAW HELPERS ── */
 function drawRoundRect(x,y,w,h,r,fill,stroke){
+  r=Math.max(0,Math.min(r,w/2,h/2));
   ctx.beginPath();
   ctx.moveTo(x+r,y);
   ctx.arcTo(x+w,y,x+w,y+h,r);
@@ -445,7 +446,7 @@ function drawHOD(h){
   // badge
   ctx.fillStyle= rage ? '#ff5252' : '#4fc3f7';
   ctx.fillRect(x+20,y+34,10,8);
-  ctx.fillStyle='white';ctx.font='5px Share Tech Mono';ctx.fillText('HOD',x+21,y+40);
+  ctx.fillStyle='white';ctx.font='5px monospace';ctx.fillText('HOD',x+21,y+40);
 
   // head
   const headColor = stun ? '#b0bec5' : (rage ? '#ff8a65' : '#ffb74d');
@@ -500,7 +501,7 @@ function drawHOD(h){
     ctx.translate(x-5,y+28);
     ctx.rotate(Math.sin(G.frame*0.05)*0.05);
     drawRoundRect(-2,-4,28,16,3,'#1a237e','#3949ab');
-    ctx.fillStyle='#4fc3f7';ctx.font='5px Share Tech Mono';
+    ctx.fillStyle='#4fc3f7';ctx.font='5px monospace';
     ctx.fillText('JETSON',0,4);
     // tiny fan
     ctx.fillStyle='#546e7a';ctx.beginPath();ctx.arc(22,4,5,0,Math.PI*2);ctx.fill();
@@ -533,7 +534,7 @@ function drawHOD(h){
   ctx.fillRect(x,y-14,bw*(hodHP/hodHPMax),bh);
   ctx.strokeStyle='#37474f';ctx.lineWidth=1;
   ctx.strokeRect(x,y-14,bw,bh);
-  ctx.fillStyle='white';ctx.font='8px Share Tech Mono';
+  ctx.fillStyle='white';ctx.font='8px monospace';
   ctx.fillText('HOD HP',x+3,y-17);
 }
 
@@ -543,14 +544,14 @@ function drawObstacle(ob){
   if(flash) return;
   // shadow
   ctx.fillStyle='rgba(0,0,0,0.2)';
-  ctx.beginPath();ctx.ellipse(ob.x+ob.w/2,G.groundY+2,ob.w/2,4,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(ob.x+ob.w/2,G.groundY+2,Math.max(0.1,ob.w/2),4,0,0,Math.PI*2);ctx.fill();
   drawRoundRect(ob.x,ob.y,ob.w,ob.h,6,ob.type.color+'33',ob.type.color);
   ctx.fillStyle=ob.type.color;
   ctx.shadowColor=ob.type.color;ctx.shadowBlur=8;
-  ctx.font=`bold ${ob.w>35?14:12}px Share Tech Mono`;
+  ctx.font=`bold ${ob.w>35?14:12}px monospace`;
   ctx.textAlign='center';
   ctx.fillText(ob.type.emoji,ob.x+ob.w/2,ob.y+ob.h/2-2);
-  ctx.font=`bold 8px Share Tech Mono`;
+  ctx.font='bold 8px monospace';
   ctx.fillText(ob.type.label,ob.x+ob.w/2,ob.y+ob.h-4);
   ctx.textAlign='left';
   ctx.shadowBlur=0;
@@ -565,7 +566,7 @@ function drawPowerup(pw){
   drawRoundRect(-15,-15,30,30,8,'rgba(255,213,79,0.2)','#ffd54f');
   ctx.font='18px serif';ctx.textAlign='center';
   ctx.fillText(pw.isSword?'⚔':'⚡',0,7);
-  ctx.font='7px Share Tech Mono';
+  ctx.font='7px monospace';
   ctx.fillStyle='#ffd54f';
   ctx.fillText(pw.isSword?'SWORD':'ENERGY',0,20);
   ctx.textAlign='left';
@@ -668,7 +669,7 @@ function updateParticles(){
     p.x+=p.vx;p.y+=p.vy;p.vy+=0.15;p.life-=0.04;
     ctx.fillStyle=p.color+Math.floor(p.life*255).toString(16).padStart(2,'0');
     ctx.shadowColor=p.color;ctx.shadowBlur=6;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);ctx.fill();
+    const pr=Math.max(0.1,p.size*p.life);ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.fill();
     ctx.shadowBlur=0;
     return p.life>0;
   });
@@ -692,7 +693,7 @@ function drawSwordSlash(){
   }
   ctx.globalAlpha=1-t*0.5;
   ctx.fillStyle='rgba(244,143,177,0.2)';
-  ctx.beginPath();ctx.arc(cx,cy,80*(1-t),0,Math.PI*2);ctx.fill();
+  const sr=Math.max(0.1,80*(1-t));ctx.beginPath();ctx.arc(cx,cy,sr,0,Math.PI*2);ctx.fill();
   ctx.restore();
   G.slashTimer--;
 }
@@ -950,3 +951,4 @@ function restartGame(){
 </script>
 </body>
 </html>
+
